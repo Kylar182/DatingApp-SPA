@@ -1,5 +1,6 @@
 import { Photo } from './Photo';
-import { Gender } from './Gender';
+import { Gender } from './Gender.enum';
+import { Country } from './Country.enum';
 
 export interface User {
   id: number;
@@ -11,7 +12,7 @@ export interface User {
   photoUrl: string;
   city: string;
   stateProv: string;
-  countryId: string;
+  country: Country;
   interests?: string;
   introduction?: string;
   lookingFor?: Gender;
