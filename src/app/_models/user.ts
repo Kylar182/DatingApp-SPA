@@ -5,11 +5,12 @@ import { Country } from './Country.enum';
 export interface User {
   id: number;
   username: string;
+  knownAs: string;
   age: number;
   gender: Gender;
   created: Date;
   lastActive: Date;
-  photoUrl: string;
+  photoURL: string;
   city: string;
   stateProv: string;
   country: Country;
