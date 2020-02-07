@@ -4,6 +4,8 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'util';
 import { UserService } from 'src/app/_services/user.service';
+import { Country } from 'src/app/_models/Country.enum';
+import { Gender } from 'src/app/_models/Gender.enum';
 
 @Component({
   selector: 'app-member-detail',
@@ -12,20 +14,24 @@ import { UserService } from 'src/app/_services/user.service';
 })
 export class MemberDetailComponent implements OnInit {
   user: User;
+  countryType: typeof Country = Country;
+  genderType: typeof Gender = Gender;
 
-  constructor(private userService: UserService, private alertify: AlertifyService, 
+  constructor(private userService: UserService, private alertify: AlertifyService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadUser();
-  }
-
-  loadUser() {
-    this.userService.getUser(this.route.snapshot.params.id).subscribe((user: User) => {
-      this.user = user;
-    }, error => {
-      this.alertify.error(error);
+    this.route.data.subscribe(data => {
+      this.user = data['user'];
     });
   }
+
+  // loadUser() {
+  //   this.userService.getUser(this.route.snapshot.params.id).subscribe((user: User) => {
+  //     this.user = user;
+  //   }, error => {
+  //     this.alertify.error(error);
+  //   });
+  // }
 
 }
