@@ -1,0 +1,81 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-4">
+      <h1>Your Profile</h1>
+    </div>
+    <div class="col-sm-8">
+      <div *ngIf="editForm.dirty" form="editForm" class="alert alert-info text-center">
+          <strong>You've made changes, any unsaved changes will be lost!</strong>
+      </div>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="text-center">
+          <img class="card-img-top img-thumbnail" src="{{user.photoURL}}" alt="{{user.knownAs}}">
+        </div>        
+        <div class="card-body">
+          <div>
+            <strong>Location:</strong>
+            <p class="mb-0">{{user.city}}</p>
+            <p class="mb-0">{{user.stateProv}}</p>
+            <p class="mb-0">{{countryString[user.country]}}</p>
+          </div>
+          <div>
+            <strong>Age:</strong>
+            <p>{{user.age}}</p>
+          </div>
+          <div>
+            <strong>Last Active:</strong>
+            <p>{{user.lastActive}}</p>
+          </div>
+          <div>
+            <strong>Member since:</strong>
+            <p>{{user.created}}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+            <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="Edit Profile">
+            <form id="editForm" #editForm="ngForm" (ngSubmit)="updateUser()">
+              <h4>Description</h4>
+              <textarea name="introduction" rows="6" class="form-control" 
+                [(ngModel)]="user.introduction"></textarea>
+              <h4>Looking For</h4>
+              <select name="lookingFor" class="form-control"
+                [(ngModel)]="user.lookingFor">
+                <option *ngFor="let gender of genderType" [ngValue]="gender"
+                  selected={{user.lookingFor}}>{{genderString[gender]}}</option>
+              </select>
+              <h4>Interests</h4>
+              <textarea name="interests" rows="6" class="form-control" 
+                [(ngModel)]="user.interests"></textarea>
+              <h4>Location Details</h4>
+                <label for="city">City</label>
+                <input type="text" class="form-control" name="city" [(ngModel)]="user.city">
+                <label for="stateProv">State / Province</label>
+                <input type="text" class="form-control" name="stateProv" [(ngModel)]="user.stateProv">
+                <label for="country">Country</label>
+                <select name="country" class="form-control"
+                [(ngModel)]="user.country">
+                <option *ngFor="let country of countryType" [ngValue]="country"
+                  selected={{user.country}}>{{countryString[country]}}</option>
+              </select>
+            </form>
+          </tab>
+          <tab heading="Edit Photos">
+            <h4>Interests</h4>
+            <p>photo edit here</p>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>

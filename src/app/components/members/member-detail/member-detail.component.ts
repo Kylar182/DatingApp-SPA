@@ -4,8 +4,8 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'util';
 import { UserService } from 'src/app/_services/user.service';
-import { Country } from 'src/app/_models/Country.enum';
-import { Gender } from 'src/app/_models/Gender.enum';
+import { Country } from 'src/app/_types/Country.enum';
+import { Gender } from 'src/app/_types/Gender.enum';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 
 @Component({

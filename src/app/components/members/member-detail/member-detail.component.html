@@ -1,13 +1,17 @@
 <div class="container mt-4">
+  <h1>{{user.knownAs}}'s Profile</h1>
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img class="card-img-top img-thumbnail" src="{{user.photoURL}}" alt="{{user.knownAs}}">
+        <div class="text-center">
+          <img class="card-img-top img-thumbnail" src="{{user.photoURL}}" alt="{{user.knownAs}}">
+        </div>        
         <div class="card-body">
           <div>
             <strong>Location:</strong>
             <p class="mb-0">{{user.city}}</p>
-            <p> {{user.stateProv}}, {{countryType[user.country]}}</p>
+            <p class="mb-0"> {{user.stateProv}}</p>
+            <p class="mb-0"> {{countryType[user.country]}}</p>
           </div>
           <div>
             <strong>Age:</strong>

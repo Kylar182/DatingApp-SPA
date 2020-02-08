@@ -1,6 +1,6 @@
 import { Photo } from './Photo';
-import { Gender } from './Gender.enum';
-import { Country } from './Country.enum';
+import { Gender } from '../_types/Gender.enum';
+import { Country } from '../_types/Country.enum';
 
 export interface User {
   id: number;
