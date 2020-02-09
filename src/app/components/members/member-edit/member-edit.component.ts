@@ -17,10 +17,11 @@ import { AuthService } from 'src/app/_services/auth.service';
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm', {static: true}) editForm: NgForm;
   user: User;
-  public countryType = Object.values(Country).filter(value => typeof value === 'number');
-  public countryString: typeof Country = Country;
-  public genderType = Object.values(Gender).filter(value => typeof value === 'number');
-  public genderString: typeof Gender = Gender;
+  countryType = Object.values(Country).filter(value => typeof value === 'number');
+  countryString: typeof Country = Country;
+  genderType = Object.values(Gender).filter(value => typeof value === 'number');
+  genderString: typeof Gender = Gender;
+  photoUrl: string;
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -35,6 +36,7 @@ export class MemberEditComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.user = data.user;
+      this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
     });
   }
 
@@ -45,7 +47,10 @@ export class MemberEditComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+  }
 
+  updateMainPhoto(photoUrl) {
+    this.user.photoURL = photoUrl;
   }
 
 }
