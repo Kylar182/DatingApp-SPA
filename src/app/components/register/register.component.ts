@@ -28,10 +28,11 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8),
-      Validators.maxLength(16),
-      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$')]),
+      username: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9.\s_-]+$'),
+      Validators.minLength(6), Validators.maxLength(35)]),
+      password: new FormControl('', [Validators.required,
+      Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$'),
+      Validators.minLength(8), Validators.maxLength(16)]),
       confirmPassword: new FormControl('', Validators.required),
       firstName: new FormControl('', [Validators.minLength(2), Validators.maxLength(35),
         Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]),
@@ -46,11 +47,11 @@ export class RegisterComponent implements OnInit {
       stateProv: new FormControl('', [Validators.minLength(2), Validators.maxLength(35),
         Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]),
       country: new FormControl('', Validators.required)
-    });
+    }, this.passwordMatchValidator);
   }
 
   passwordMatchValidator(g: FormGroup) {
-    return g.get('password').value === g.get('confirmPassword').value ? null : {'mismatch': true};
+    return g.get('password').value === g.get('confirmPassword').value ? null : {mismatch: true};
   }
   register() {
     if (this.registerForm.valid) {

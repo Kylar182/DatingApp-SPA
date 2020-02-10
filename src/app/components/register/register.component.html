@@ -3,13 +3,17 @@
   <hr>
 
   <div class="form-group">
-    <input type="text" class="form-control" required formControlName="username" 
-      pattern="^.{6,35}$" maxlength=35 required placeholder="Username">
+    <input type="text" class="form-control" formControlName="username"
+    [ngClass]="{'is-invalid': registerForm.get('username').errors && registerForm.get('username').touched}"
+     placeholder="Username"><div class="invalid-feedback">Username must be 6 to 35 characters,
+        upper/lowercase, dashes, dots, underscores, numbers</div>
   </div>
 
   <div class="form-group">
     <input type="password" class="form-control" formControlName="password"
-      placeholder="Password">
+    [ngClass]="{'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched}"
+      placeholder="Password"><div class="invalid-feedback">Password must be 8 to 16 characters,
+        at least 1 Uppercase, 1 lowercase, 1 special character, & 1 number</div>
   </div>
 
   <div class="form-group">
@@ -18,19 +22,26 @@
   </div>
 
   <div class="form-group">
-    <input type="text" class="form-control" formControlName="firstName" 
-      placeholder="First Name">
+    <input type="text" class="form-control" formControlName="firstName" placeholder="First Name"
+    [ngClass]="{'is-invalid': registerForm.get('firstName').errors && registerForm.get('firstName').touched}">    
+      <div class="invalid-feedback">First name must be 2 to 35 characters,
+         and can contain upper/lowercase characters, dashes, dots, underscores, and numbers</div>
   </div>
 
   <div class="form-group">
-    <input type="text" class="form-control" formControlName="lastName" 
-      placeholder="Last Name">
+    <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name"
+    [ngClass]="{'is-invalid': registerForm.get('lastName').errors && registerForm.get('lastName').touched}">    
+    <div class="invalid-feedback">Last name must be 2 to 35 characters, and can contain 
+      upper/lowercase characters, dashes, dots, underscores, and numbers</div>
   </div>
 
   <div class="form-group">
-    <select formControlName="gender" class="form-control">
+    <select formControlName="gender" class="form-control" 
+    [ngClass]="{'is-invalid': registerForm.get('gender').errors && registerForm.get('gender').touched}">
+      <option>--Gender--</option>
       <option *ngFor="let gender of genderType" [ngValue]="gender">{{genderString[gender]}}</option>
     </select>
+    <div class="invalid-feedback">A Gender choice is required</div>
   </div>
 
   <div class="form-group">
