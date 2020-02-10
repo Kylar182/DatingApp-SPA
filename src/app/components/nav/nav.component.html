@@ -23,7 +23,7 @@
       </a>
     
       <div class="dropdown-menu mt-3" *dropdownMenu>
-        <a class="dropdown-item"[routerLink]="['/member/edit']"><i class="fa fa-user"></i>Edit Profile</a>
+        <a class="dropdown-item"[routerLink]="['/member/edit']"><i class="fa fa-user"></i> Edit Profile</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out" ></i> Logout</a>
       </div>
@@ -34,7 +34,7 @@
         placeholder="Username" pattern="^.{6,35}$" maxlength=35 required [(ngModel)]="model.username">
       <input class="form-control mr-sm-2" type="password" name="pasword" 
         placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$" required [(ngModel)]="model.password">
-      <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+      <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit"><i class="fa fa-sign-in"></i> Login</button>
     </form>
   </div>
 </nav>

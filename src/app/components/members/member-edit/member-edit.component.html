@@ -64,10 +64,10 @@
                 <input type="text" class="form-control" name="stateProv" [(ngModel)]="user.stateProv">
                 <label for="country">Country</label>
                 <select name="country" class="form-control"
-                [(ngModel)]="user.country">
-                <option *ngFor="let country of countryType" [ngValue]="country"
-                  selected={{user.country}}>{{countryString[country]}}</option>
-              </select>
+                  [(ngModel)]="user.country">
+                  <option *ngFor="let country of countryType" [ngValue]="country"
+                    selected={{user.country}}>{{countryString[country]}}</option>
+                </select>
             </form>
           </tab>
           <tab heading="Edit Photos">
