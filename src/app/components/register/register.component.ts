@@ -27,27 +27,34 @@ export class RegisterComponent implements OnInit {
               private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.registerForm = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9.\s_-]+$'),
-      Validators.minLength(6), Validators.maxLength(35)]),
-      password: new FormControl('', [Validators.required,
-      Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$'),
-      Validators.minLength(8), Validators.maxLength(16)]),
-      confirmPassword: new FormControl('', Validators.required),
-      firstName: new FormControl('', [Validators.minLength(2), Validators.maxLength(35),
-        Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]),
-      lastName: new FormControl('', [Validators.minLength(2), Validators.maxLength(35),
-        Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]),
-      gender: new FormControl('', Validators.required),
-      dateOfBirth: new FormControl(),
-      knownAs: new FormControl('', [Validators.minLength(2), Validators.maxLength(35),
-        Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]),
-      city: new FormControl('', [Validators.minLength(2), Validators.maxLength(35),
-        Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]),
-      stateProv: new FormControl('', [Validators.minLength(2), Validators.maxLength(35),
-        Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]),
-      country: new FormControl('', Validators.required)
-    }, this.passwordMatchValidator);
+    this.bsConfig = {
+      containerClass: 'theme-green'
+    },
+    this.createRegisterForm();
+  }
+
+  createRegisterForm() {
+    this.registerForm = this.fb.group({
+      username: ['', [Validators.required, Validators.pattern('^[A-Za-z0-9.\s_-]+$'),
+      Validators.minLength(6), Validators.maxLength(35)]],
+      password: ['', [Validators.required,
+        Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$'),
+        Validators.minLength(8), Validators.maxLength(16)]],
+      confirmPassword: ['', Validators.required],
+      firstName: ['', [Validators.minLength(2), Validators.maxLength(35),
+        Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]],
+      lastName: ['', [Validators.minLength(2), Validators.maxLength(35),
+        Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]],
+      gender: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      knownAs: ['', [Validators.minLength(2), Validators.maxLength(35),
+        Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]],
+      city: ['', [Validators.minLength(2), Validators.maxLength(35),
+        Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]],
+      stateProv: ['', [Validators.minLength(2), Validators.maxLength(35),
+        Validators.required, Validators.pattern('^[A-Za-z.\s_-]+$')]],
+      country: ['', Validators.required]
+    }, {validator: this.passwordMatchValidator});
   }
 
   passwordMatchValidator(g: FormGroup) {

@@ -17,57 +17,90 @@
   </div>
 
   <div class="form-group">
-    <input type="password" class="form-control" formControlName="confirmPassword"
-      placeholder="Confirm your Password">
+    <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm your Password"
+    [ngClass]="{'is-invalid': registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched
+    || registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')}" placeholder="Confirm Password">
+    <div class="invalid-feedback" *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched
+    || registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched">
+    Password confirmation is required</div>
   </div>
 
   <div class="form-group">
-    <input type="text" class="form-control" formControlName="firstName" placeholder="First Name"
-    [ngClass]="{'is-invalid': registerForm.get('firstName').errors && registerForm.get('firstName').touched}">    
+    <input type="text" class="form-control" formControlName="firstName" 
+      placeholder="First Name" [ngClass]="{'is-invalid': registerForm.get('firstName').errors
+      && registerForm.get('firstName').touched}">    
       <div class="invalid-feedback">First name must be 2 to 35 characters,
-         and can contain upper/lowercase characters, dashes, dots, underscores, and numbers</div>
+        and can contain upper/lowercase characters, dashes, dots, underscores, and numbers</div>
   </div>
 
   <div class="form-group">
     <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name"
-    [ngClass]="{'is-invalid': registerForm.get('lastName').errors && registerForm.get('lastName').touched}">    
-    <div class="invalid-feedback">Last name must be 2 to 35 characters, and can contain 
-      upper/lowercase characters, dashes, dots, underscores, and numbers</div>
+      [ngClass]="{'is-invalid': registerForm.get('lastName').errors 
+      && registerForm.get('lastName').touched}">    
+      <div class="invalid-feedback">Last name must be 2 to 35 characters, and can contain 
+        upper/lowercase characters, dashes, dots, underscores, and numbers</div>
   </div>
 
   <div class="form-group">
     <select formControlName="gender" class="form-control" 
-    [ngClass]="{'is-invalid': registerForm.get('gender').errors && registerForm.get('gender').touched}">
-      <option>--Gender--</option>
-      <option *ngFor="let gender of genderType" [ngValue]="gender">{{genderString[gender]}}</option>
+    [ngClass]="{'is-invalid': registerForm.get('gender').errors
+    && registerForm.get('gender').touched}">
+      <option *ngFor="let gender of genderType" [ngValue]="gender">
+        {{genderString[gender]}}</option>
     </select>
     <div class="invalid-feedback">A Gender choice is required</div>
   </div>
 
   <div class="form-group">
-    <input type="text" class="form-control" required formControlName="knownAs" 
-      placeholder="Nick Name / Known As">
+    <input [ngClass]="{'is-invalid': registerForm.get('dateOfBirth').errors && 
+    registerForm.get('dateOfBirth').touched}" class="form-control"
+      placeholder="Date of Birth" formControlName="dateOfBirth" type="text" bsDatepicker
+      [bsConfig]="bsConfig">
+    <div class="invalid-feedback" *ngIf="registerForm.get('dateOfBirth').touched 
+    && registerForm.get('dateOfBirth').hasError('required')">Date of Birth is required</div>
   </div>
 
   <div class="form-group">
-    <input type="text" class="form-control" required formControlName="city" 
-      placeholder="City">
+    <input type="text" class="form-control" formControlName="knownAs"
+      placeholder="Nick Name / Known As" [ngClass]="{'is-invalid': 
+      registerForm.get('knownAs').errors && registerForm.get('knownAs').touched}">    
+      <div class="invalid-feedback">Nick name / Known As must be 2 to 35 characters,
+      and can contain upper/lowercase characters, dashes, dots, underscores, and numbers</div>
   </div>
 
   <div class="form-group">
-    <input type="text" class="form-control" required formControlName="stateProv"
-      placeholder="State / Province">
+    <input type="text" class="form-control" formControlName="city" placeholder="City"
+      [ngClass]="{'is-invalid': registerForm.get('city').errors 
+      && registerForm.get('city').touched}">    
+      <div class="invalid-feedback">City must be 2 to 35 characters,
+         and can contain upper/lowercase characters, dashes, dots, underscores, and numbers</div>
+      
   </div>
 
   <div class="form-group">
-    <select formControlName="country" class="form-control">
-      <option *ngFor="let country of countryType" [ngValue]="country">{{countryString[country]}}</option>
+    <input type="text" class="form-control" formControlName="stateProv"
+      placeholder="State / Province" [ngClass]="{'is-invalid': registerForm.get('stateProv')
+      .errors && registerForm.get('stateProv').touched}">
+      <div class="invalid-feedback">State / Province must be 2 to 35 characters,
+        and can contain upper/lowercase characters, dashes, dots, underscores,
+        and numbers</div>
+  </div>
+
+  <div class="form-group">
+    <select formControlName="country" class="form-control"
+    [ngClass]="{'is-invalid': registerForm.get('country').errors 
+    && registerForm.get('country').touched}">
+      <option *ngFor="let country of countryType" [ngValue]="country">
+        {{countryString[country]}}</option>
     </select>
+    <div class="invalid-feedback">A Country choice is required</div>
   </div>
 
   <div class="form-group text-center">
-    <button class="btn btn-success mr-1" type="submit"><i class="fa fa-user"></i> Register</button>
-    <button class="btn btn-warning" type="button" (click)="cancel()"><i class="fa fa-ban"></i> Cancel</button>
+    <button class="btn btn-success mr-1" [disabled]="!registerForm.valid"
+    type="submit"><i class="fa fa-user"></i> Register</button>
+    <button class="btn btn-warning" type="button" (click)="cancel()">
+      <i class="fa fa-ban"></i> Cancel</button>
   </div>
   
 </form>
