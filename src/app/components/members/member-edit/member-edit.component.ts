@@ -21,7 +21,7 @@ export class MemberEditComponent implements OnInit {
   countryString: typeof Country = Country;
   genderType = Object.values(Gender).filter(value => typeof value === 'number');
   genderString: typeof Gender = Gender;
-  photoUrl: string;
+  photoURL: string;
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -36,7 +36,7 @@ export class MemberEditComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.user = data.user;
-      this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+      this.authService.currentPhotoURL.subscribe(photoURL => this.photoURL = photoURL);
     });
   }
 
@@ -49,8 +49,8 @@ export class MemberEditComponent implements OnInit {
     });
   }
 
-  updateMainPhoto(photoUrl) {
-    this.user.photoURL = photoUrl;
+  updateMainPhoto(photoURL) {
+    this.user.photoURL = photoURL;
   }
 
 }
