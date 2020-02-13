@@ -4,6 +4,7 @@ import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Pagination, PaginatedResult } from 'src/app/_models/Pagination';
+import { Gender } from 'src/app/_types/Gender.enum';
 
 @Component({
   selector: 'app-member-list',
@@ -12,6 +13,10 @@ import { Pagination, PaginatedResult } from 'src/app/_models/Pagination';
 })
 export class MemberListComponent implements OnInit {
   users: User[];
+  user: User = JSON.parse(localStorage.getItem('user'));
+  genderType = Object.values(Gender).filter(value => typeof value === 'number');
+  genderString: typeof Gender = Gender;
+  userParams: any = {};
   pagination: Pagination;
 
   constructor(private userService: UserService, private alertify: AlertifyService,
@@ -22,6 +27,11 @@ export class MemberListComponent implements OnInit {
       this.users = data.users.result;
       this.pagination = data.users.pagination;
     });
+
+    this.userParams.gender = (this.user.lookingFor ||
+      (this.user.gender === Gender.Female ? Gender.Male : Gender.Female));
+    this.userParams.minAge = 18;
+    this.userParams.maxAge = 99;
   }
 
   pageChanged(event: any): void {
@@ -29,8 +39,17 @@ export class MemberListComponent implements OnInit {
     this.loadUsers();
   }
 
+  resetFilters() {
+    this.userParams.gender = (this.user.lookingFor ||
+      (this.user.gender === Gender.Female ? Gender.Male : Gender.Female));
+    this.userParams.minAge = 18;
+    this.userParams.maxAge = 99;
+    this.loadUsers();
+  }
+
   loadUsers() {
-    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage)
+    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage,
+        this.userParams)
       .subscribe((res: PaginatedResult<User[]>) => {
         this.users = res.result;
         this.pagination = res.pagination;
