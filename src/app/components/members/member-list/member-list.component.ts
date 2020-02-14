@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Pagination, PaginatedResult } from 'src/app/_models/Pagination';
 import { Gender } from 'src/app/_types/Gender.enum';
+import { Country } from 'src/app/_types/Country.enum';
 
 @Component({
   selector: 'app-member-list',
@@ -16,6 +17,8 @@ export class MemberListComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   genderType = Object.values(Gender).filter(value => typeof value === 'number');
   genderString: typeof Gender = Gender;
+  countryType = Object.values(Country).filter(value => typeof value === 'number');
+  countryString: typeof Country = Country;
   userParams: any = {};
   pagination: Pagination;
 
@@ -32,6 +35,8 @@ export class MemberListComponent implements OnInit {
       (this.user.gender === Gender.Female ? Gender.Male : Gender.Female));
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
+    this.userParams.country = this.user.country;
+    this.userParams.orderBy = false;
   }
 
   pageChanged(event: any): void {
@@ -44,6 +49,7 @@ export class MemberListComponent implements OnInit {
       (this.user.gender === Gender.Female ? Gender.Male : Gender.Female));
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
+    this.userParams.country = this.user.country;
     this.loadUsers();
   }
 
